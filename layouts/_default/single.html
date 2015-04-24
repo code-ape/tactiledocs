@@ -1,0 +1,14 @@
+{{ partial "header.html" . }}
+
+{{ partial "nav.html" . }}
+
+{{ partial "content-begin.html" . }}
+
+<div class="pre-scrollable" style="max-height:100%;">
+<h1>{{ .Title }}</h1>
+<span class="post-date">{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
+{{ .Content }}
+</div>
+{{ partial "content-end.html" . }}
+
+{{ partial "footer.html" . }}

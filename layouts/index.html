@@ -1,0 +1,18 @@
+{{ partial "header.html" . }}
+
+{{ partial "nav.html" . }}
+
+{{ partial "content-begin.html" . }}
+
+<h1>Welcome to {{ .Site.Title }}</h1>
+<p>Things:<br>
+{{range $index, $element := .Site.Sections}}
+	{{ $index }}
+	{{ $element.Count }}
+	<br>
+{{ end }}
+</p>
+
+{{ partial "content-end.html" . }}
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,38 @@
+<div class="hidden-xs col-sm-3 col-md-3 col-lg-3" style="position: fixed; margin-top:50px">
+	<div style="min-height: 100%; background-color: white; padding: 19px">
+		<ul class="nav nav-list">
+			{{ $.Scratch.Set "version" "00_00" }}
+			
+			{{if and (isset .Params "version") (isset .Params "version") }}
+				{{ $.Scratch.Set "version" .Params.version }}
+			{{else}}
+				<!-- Get version -->
+				{{ range $ver_i, $ver_e := .Site.Taxonomies.version }}
+					{{ $.Scratch.Set "version" $ver_i }}
+				{{end}}
+			{{end}}
+
+			{{range $i, $e := .Site.Sections}} 
+			{{ $HeadTitle := (title (replace $i "-" " ")) }}
+			
+			<li>
+				<a id="toggler" data-toggle="collapse" class="active" data-target="#list-{{$i}}">
+					<h4>{{$HeadTitle}}</h4>
+				</a>
+
+				<div id="list-{{$i}}" class="collapse">
+					<ul class="nav nav-list">
+						{{range $ii, $ee := (sort $e.Pages.ByTitle)}}	
+						{{if eq $ee.Params.version ($.Scratch.Get "version") }}
+						<li class="active" style="margin-left: 10px">
+						<a href="{{$ee.Permalink}}">{{ replace $ee.Title "-" " "}}</a>
+						</li>
+						{{end}}
+						{{end}}
+					</ul>
+				</div>
+			</li>
+			{{end}}
+		</ul>
+	</div>
+</div>
